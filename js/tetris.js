@@ -1,3 +1,5 @@
+const directions = {left: new Point(-1, 0), right: new Point(1, 0), up: new Point(0, 1), down: new Point(0, -1)};
+
 function Point(x, y){
   this.x = x;
   this.y = y;
@@ -13,6 +15,10 @@ Point.prototype.add = function(point){
 
 Point.prototype.subtract = function(point){
   return new Point(this.x - point.x, this.y - point.y);
+}
+
+Point.prototype.multiply = function(amount){
+  return new Point(this.x * amount, this.y * amount);
 }
 
 Point.prototype.toString = function(){
@@ -105,8 +111,16 @@ Block.prototype.rotate = function(counterclockwise){
     rotated.push(newPoint);
   });
   var rotatedGlobal = new Block(rotated).toGlobalCoordinates(topLeft);
-  debugger;
   return rotatedGlobal;
+}
+
+Block.prototype.translate = function(direction, amount){
+  var moveBy = direction.multiply(amount);
+  var result = [];
+  this.points.forEach(function(point){
+    result.push(point.add(moveBy));
+  });
+  return new Block(result);
 }
 
 var ogCoords = [new Point(4, 9), new Point(5, 9), new Point(5, 10), new Point(5, 11)];
