@@ -115,12 +115,27 @@ Block.prototype.rotate = function(counterclockwise){
 }
 
 Block.prototype.translate = function(direction, amount){
+  if(isNaN(amount)){
+    amount = 1;
+  }
   var moveBy = direction.multiply(amount);
   var result = [];
   this.points.forEach(function(point){
     result.push(point.add(moveBy));
   });
   return new Block(result);
+}
+
+Block.prototype.collides = function(otherBlock){
+  var collides = false;
+  this.points.forEach(function(thisPoint){
+    otherBlock.points.forEach(function(otherPoint){
+      if(thisPoint.equals(otherPoint)){
+        collides = true;
+      }
+    })
+  });
+  return collides;
 }
 
 var ogCoords = [new Point(4, 9), new Point(5, 9), new Point(5, 10), new Point(5, 11)];
