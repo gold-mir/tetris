@@ -42,11 +42,7 @@ $(document).ready(function() {
   }
 
   function rotatePiece(){
-    var i = 0;
-    inputArr.forEach(function(rotate){
-      inputArr[i].rotator;
-      i++;
-    });
+
     drawScreen(ctx, canvas);
   }
 
@@ -70,10 +66,8 @@ $(document).ready(function() {
   }
 });
 
+var inputPiece = pieces.piece4;
 
-var inputArr = [
-  {x:2,y:3,color:1},{x:1,y:2,color:1},{x:2,y:1,color:1},{x:2,y:2,color:1},
-];
 
 function buildCanvas(ctx) {
   ctx.beginPath();
@@ -149,7 +143,6 @@ function flashyText(ctx, flashy) {
   return flashy;
 }
 
-var inputPiece = pieces.piece7;
 
 
 function drawScreen(c, canvas){
@@ -164,8 +157,6 @@ function drawScreen(c, canvas){
   }
 
 }
-
-
 
 function drawTile(c, x, y, color) {
   if ((x <= 9) && (y <= 19)) {

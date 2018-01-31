@@ -144,13 +144,13 @@ var squareRotator = function(counterclockwise){
 }
 
 const pieces = {
-  piece1: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(2, 0)], 1, lineRotator),
-  piece2: new Block([new Point(-1, 1), new Point(-1, 0), new Point(0, 0, true), new Point(1, 0)], 2),
-  piece3: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(1, 1)], 3),
+  piece1: new Block([new Point(0, 0), new Point(1, 0, true), new Point(2, 0), new Point(3, 0)], 1, lineRotator),
+  piece2: new Block([new Point(0, 1), new Point(0, 0), new Point(1, 0, true), new Point(2, 0)], 2),
+  piece3: new Block([new Point(0, 0), new Point(1, 0, true), new Point(2, 0), new Point(2, 1)], 3),
   piece4: new Block([new Point(1, 1, true), new Point(1, 0), new Point(0, 0), new Point(0, 1)], 4, squareRotator),
-  piece5: new Block([new Point(-1, -1), new Point(0, -1), new Point(0, 0, true), new Point(1, 0)], 5),
-  piece6: new Block([new Point(-1, 0), new Point (0, 0, true), new Point(0, -1), new Point(1, -1)], 6),
-  piece7: new Block([new Point(0, 1), new Point(0, 0, true), new Point(-1, 0), new Point(1, 0)], 7)
+  piece5: new Block([new Point(0, 0), new Point(1, 0), new Point(1, 1, true), new Point(2, 1)], 5),
+  piece6: new Block([new Point(0, 1), new Point (1, 1, true), new Point(1, 0), new Point(2, 0)], 6),
+  piece7: new Block([new Point(1, 1), new Point(1, 0, true), new Point(0, 0), new Point(2, 0)], 7)
 };
 
 function colorPick(color) {
