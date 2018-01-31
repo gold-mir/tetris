@@ -1,15 +1,5 @@
 const directions = {left: new Point(-1, 0), right: new Point(1, 0), up: new Point(0, 1), down: new Point(0, -1)};
 
-const pieces = {
-  piece1: new Block([new Point(0, 2), new Point(0, 1), new Point(0, 0), new Point(0, -1)]),
-  piece2: new Block([new Point(-1, 1), new Point(-1, 0), new Point(0, 0, true), new Point(1, 0)]),
-  piece3: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(1, 1)]),
-  piece4: new Block([new Point(1, 1), new Point(1, 0), new Point(0, 0), new Point(0, 1)]),
-  piece5: new Block([new Point(-1, -1), new Point(0, -1), new Point(0, 0, true), new Point(1, 0)]),
-  piece6: new Block([new Point(-1, 0), new Point (0, 0, true), new Point(0, -1), new Point(1, -1)]),
-  piece7: new Block([new Point(0, 1), new Point(0, 0, true), new Point(-1, 0), new Point(1, 0)])
-}
-
 function Point(x, y, center){
   this.x = x;
   this.y = y;
@@ -54,6 +44,7 @@ Point.prototype.toString = function(){
 
 function Block(points, rotator){
   if(rotator != undefined){
+    this.defaultRotate = Block.prototype.rotate;
     this.rotate = rotator;
   }
   this.points = points;
@@ -61,9 +52,7 @@ function Block(points, rotator){
 }
 
 Block.prototype.newCopy = function(points){
-  var newBlock = new Block(points);
-  newBlock.rotate = this.rotate;
-  newBlock.findCenter = this.findCenter;
+  var newBlock = new Block(points, this.rotate);
   newBlock.meta = this.meta;
   return newBlock;
 }
@@ -139,3 +128,26 @@ Block.prototype.collides = function(otherBlock){
   });
   return collides;
 }
+
+var lineRotator = function(counterclockwise){
+  var vertical = (this.points[0].y !== this.points[1].y);
+  if(vertical){
+    return this.defaultRotate(false);
+  } else {
+    return this.defaultRotate(true);
+  }
+}
+
+var squareRotator = function(counterclockwise){
+  return this;
+}
+
+const pieces = {
+  piece1: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(2, 0)], lineRotator),
+  piece2: new Block([new Point(-1, 1), new Point(-1, 0), new Point(0, 0, true), new Point(1, 0)]),
+  piece3: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(1, 1)]),
+  piece4: new Block([new Point(1, 1, true), new Point(1, 0), new Point(0, 0), new Point(0, 1)], squareRotator),
+  piece5: new Block([new Point(-1, -1), new Point(0, -1), new Point(0, 0, true), new Point(1, 0)]),
+  piece6: new Block([new Point(-1, 0), new Point (0, 0, true), new Point(0, -1), new Point(1, -1)]),
+  piece7: new Block([new Point(0, 1), new Point(0, 0, true), new Point(-1, 0), new Point(1, 0)])
+};
