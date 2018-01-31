@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   canvas = document.getElementById('canvas');
   c = canvas.getContext('2d');
@@ -93,37 +94,26 @@ function colorPick(color) {
   return colors;
 }
 
-function drawScreen(c, canvas) {
+function drawScreen(c, canvas){
   c.clearRect(0, 0, canvas.width, canvas.height);
   buildCanvas(c);
   drawUI(c);
-  inputArr = [{
-    x: 1,
-    y: 1,
-    color: 1
-  }, {
-    x: 1,
-    y: 2,
-    color: 1
-  }, {
-    x: 2,
-    y: 1,
-    color: 1
-  }, {
-    x: 2,
-    y: 2,
-    color: 1
-  }, ]
-  for (var i = 0; i < inputArr.length; i++) {
-    drawTile(c, inputArr[i].x, inputArr[i].y, inputArr[i].color);
+  console.log(inputPiece);
+
+  for(var i = 0; i < inputPiece.points.length; i++) {
+    drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.color);
+
   }
+
 }
 
 function drawTile(c, x, y, color) {
   if ((x <= 9) && (y <= 19)) {
+
     var xPos = (50 * x) + 5;
     var yPos = (50 * y) + 5;
     var colors = colorPick(color);
+
 
     c.lineWidth = 2;
     c.beginPath();
@@ -190,11 +180,6 @@ function drawTile(c, x, y, color) {
     console.log("Call out of bounds to drawTile function");
   };
 }
-
-
-
-
-
 
 function drawUI(c, canvas) {
   c.beginPath();
