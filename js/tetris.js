@@ -142,6 +142,40 @@ var squareRotator = function(counterclockwise){
   return this;
 }
 
+
+var currentBlock0 = [new Point(0,19,false),new Point(0,18,false),new Point(0,17,false),new Point(0,16,false)];
+var currentBlock1 = [new Point(1,19,false),new Point(1,18,false),new Point(2,18,false),new Point(2,19,false)];
+var currentBlock2 = [new Point(3,19,false),new Point(3,18,false),new Point(4,18,false),new Point(4,19,false)];
+var currentBlock3 = [new Point(5,19,false),new Point(5,18,false),new Point(5,17,false),new Point(5,16,false)];
+var currentBlock4 = [new Point(6,19,false),new Point(6,18,false),new Point(7,18,false),new Point(7,19,false)];
+var currentBlock5 = [new Point(8,19,false),new Point(8,18,false),new Point(9,19,false),new Point(9,18,false)];
+
+var bottomBlock =[];
+function mergeBlocks (bottomBlock, currentBlock) {
+// Assume the input is clean, i.e. the blocks do not overlap, the currentBlock is a set of four Points
+// Assume currentBlock is an array of four Points representing the current location of the active block
+  bottomBlock.push.apply(bottomBlock, currentBlock);
+  var numPointsInRow = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  bottomBlock.forEach(function(element) {
+    numPointsInRow[element.y]++
+  });
+  console.log (bottomBlock);
+  for (i=0;i<=19;i++) {
+    if (numPointsInRow[i]===10) {
+      var tempBBlock = [];
+      bottomBlock.forEach(function(element) {
+        if(element.y>i) {
+          tempBBlock.push(this);
+        } else if (element.y<i) {
+          tempBBlock.push(new Point(element.x,element.y+1,false));
+        };
+      });
+      console.log (tempBBlock);
+      bottomBlock = tempBBlock;
+    };
+  };
+}
+
 const pieces = {
   piece1: new Block([new Point(-1, 0), new Point(0, 0, true), new Point(1, 0), new Point(2, 0)], lineRotator),
   piece2: new Block([new Point(-1, 1), new Point(-1, 0), new Point(0, 0, true), new Point(1, 0)]),
