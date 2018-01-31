@@ -26,15 +26,32 @@ function buildCanvas(ctx) {
 }
 
 function colorPick(color) {
-  var colors;
-  if (color===1) {colors = ["#00ffff","#33ffff","#00dddd"];}
-  else if (color===2) {colors = ["#0000ff","#3333ff","#0000dd"];}
-  else if (color===3) {colors = ["#ff7700","#ff9933","#dd6600"];}
-  else if (color===4) {colors = ["#ffff00","#ffff33","#dddd00"];}
-  else if (color===5) {colors = ["#00ff00","#33ff33","#00dd00"];}
-  else if (color===6) {colors = ["#ff0000","#ff3333","#dd0000"];}
-  else if (color===7) {colors = ["#770077","#993399","#660066"];}
-  else {console.log ("color out of bounds in colorpick");}
+  var colors = [];
+  switch(color) {
+    case 1:
+    colors = ["#00ffff","#33ffff","#00dddd"];
+    break;
+    case 2:
+    colors = ["#0000ff","#3333ff","#0000dd"];
+    break;
+    case 3:
+    colors = ["#ff7700","#ff9933","#dd6600"];
+    break;
+    case 4:
+    colors = ["#ffff00","#ffff33","#dddd00"];
+    break;
+    case 5:
+    colors = ["#00ff00","#33ff33","#00dd00"];
+    break;
+    case 6:
+    colors = ["#ff0000","#ff3333","#dd0000"];
+    break;
+    case 7:
+    colors = ["#770077","#993399","#660066"];
+    break;
+    default:
+    console.log ("color out of bounds in colorpick");
+  }
   return colors;
 }
 
