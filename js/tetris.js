@@ -1,4 +1,4 @@
-const directions = {left: new Point(-1, 0), right: new Point(1, 0), up: new Point(0, 1), down: new Point(0, -1)};
+const directions = {left: new Point (-1, 0), right: new Point(1, 0), down: new Point(0, 1), up: new Point(0, -1)};
 
 function Point(x, y, center){
   this.x = x;

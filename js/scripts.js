@@ -27,38 +27,17 @@ $(document).ready(function () {
 });
 
 function moveLeft(c, canvas) {
-  var i = 0;
-  inputPiece.points.forEach(function (input) {
-    if (inputPiece.points[i].x <=0){
-      console.log("left")
-    } else {inputPiece.points[i].x -= 1;
-      i++;
-    }
-  });
+  inputPiece = inputPiece.translate(directions.left)
   drawScreen(c, canvas);
 }
 
 function moveRight(c, canvas) {
-  var i = 0;
-  inputPiece.points.forEach(function (input) {
-    if (inputPiece.points[i].x >=9){
-      console.log("Right")
-    } else {inputPiece.points[i].x += 1;
-      i++;
-    }
-  });
+  inputPiece = inputPiece.translate(directions.right)
   drawScreen(c, canvas);
 }
 
 function moveDown(c, canvas) {
-  var i = 0;
-  inputPiece.points.forEach(function (input) {
-    if (inputPiece.points[i].y >= 19){
-      console.log("down")
-    } else {inputPiece.points[i].y += 1;
-      i++;
-    }
-  });
+  inputPiece = inputPiece.translate(directions.down)
   drawScreen(c, canvas);
 }
 
