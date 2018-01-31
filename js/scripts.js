@@ -150,8 +150,7 @@ function drawScreen(c, canvas){
   buildCanvas(c);
   drawUI(c);
   console.log(inputPiece);
-  console.log(inputPiece.points[0]);
-  console.log(inputPiece.points.length);
+
   for(var i = 0; i < inputPiece.points.length; i++) {
     drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.color);
   }
