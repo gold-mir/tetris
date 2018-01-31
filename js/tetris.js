@@ -144,37 +144,36 @@ var squareRotator = function(counterclockwise){
 }
 
 
-var currentBlock0 = [new Point(0,19,false),new Point(0,18,false),new Point(0,17,false),new Point(0,16,false)];
-var currentBlock1 = [new Point(1,19,false),new Point(1,18,false),new Point(2,18,false),new Point(2,19,false)];
-var currentBlock2 = [new Point(3,19,false),new Point(3,18,false),new Point(4,18,false),new Point(4,19,false)];
-var currentBlock3 = [new Point(5,19,false),new Point(5,18,false),new Point(5,17,false),new Point(5,16,false)];
-var currentBlock4 = [new Point(6,19,false),new Point(6,18,false),new Point(7,18,false),new Point(7,19,false)];
-var currentBlock5 = [new Point(8,19,false),new Point(8,18,false),new Point(9,19,false),new Point(9,18,false)];
+var currentBlock0 = new Block([new Point(0, 19), new Point(0, 18, true), new Point(0, 17), new Point(0,16)], 1);
+var currentBlock1 = new Block([new Point(1, 19), new Point(1, 18, true), new Point(2, 18), new Point(2,19)], 4);
+var currentBlock2 = new Block([new Point(3, 19), new Point(3, 18, true), new Point(4, 18), new Point(4,19)], 4);
+var currentBlock3 = new Block([new Point(5, 19), new Point(5, 18, true), new Point(5, 17), new Point(5,16)], 1);
+var currentBlock4 = new Block([new Point(6, 19), new Point(6, 18, true), new Point(7, 18), new Point(7,19)], 4);
+var currentBlock5 = new Block([new Point(8, 19), new Point(8, 18, true), new Point(9, 19), new Point(9,18)], 4);
 
-var bottomBlock =[];
+var bottomBlock = new Block([], 1);
 function mergeBlocks (bottomBlock, currentBlock) {
 // Assume the input is clean, i.e. the blocks do not overlap, the currentBlock is a set of four Points
 // Assume currentBlock is an array of four Points representing the current location of the active block
-  bottomBlock.push.apply(bottomBlock, currentBlock);
+  bottomBlock.points.push.apply(bottomBlock.points, currentBlock.points);
   var numPointsInRow = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  bottomBlock.forEach(function(element) {
+  bottomBlock.points.forEach(function(element) {
     numPointsInRow[element.y]++
   });
-  console.log (bottomBlock);
   for (i=0;i<=19;i++) {
     if (numPointsInRow[i]===10) {
-      var tempBBlock = [];
-      bottomBlock.forEach(function(element) {
+      var tempBBlock = new Block([], 1);
+      bottomBlock.points.forEach(function(element) {
         if(element.y>i) {
-          tempBBlock.push(this);
+          tempBBlock.points.push(element);
         } else if (element.y<i) {
-          tempBBlock.push(new Point(element.x,element.y+1,false));
+          tempBBlock.points.push(element.newCopy(element.x,element.y+1));
         };
       });
-      console.log (tempBBlock);
       bottomBlock = tempBBlock;
     };
   };
+  return bottomBlock;
 }
 
 const pieces = {
