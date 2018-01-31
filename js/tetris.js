@@ -44,7 +44,7 @@ Point.prototype.toString = function(){
 
 function Block(points, color, rotator){
   this.points = points;
-  this.color = colorPick(color);
+  this.color = color;
   if(rotator != undefined){
     this.defaultRotate = Block.prototype.rotate;
     this.rotate = rotator;
@@ -187,32 +187,32 @@ const pieces = {
   piece7: new Block([new Point(1, 1), new Point(1, 0, true), new Point(0, 0), new Point(2, 0)], 7)
 };
 
-function colorPick(color) {
-  var colors = [];
-  switch(color) {
-    case 1:
-    colors = ["#00ffff","#33ffff","#00dddd"];
-    break;
-    case 2:
-    colors = ["#0000ff","#3333ff","#0000dd"];
-    break;
-    case 3:
-    colors = ["#ff7700","#ff9933","#dd6600"];
-    break;
-    case 4:
-    colors = ["#ffff00","#ffff33","#dddd00"];
-    break;
-    case 5:
-    colors = ["#00ff00","#33ff33","#00dd00"];
-    break;
-    case 6:
-    colors = ["#ff0000","#ff3333","#dd0000"];
-    break;
-    case 7:
-    colors = ["#770077","#993399","#660066"];
-    break;
-    default:
-    console.log ("color out of bounds in colorpick");
-  }
-  return colors;
-}
+// function colorPick(color) {
+//   var colors = [];
+//   switch(color) {
+//     case 1:
+//     colors = ["#00ffff","#33ffff","#00dddd"];
+//     break;
+//     case 2:
+//     colors = ["#0000ff","#3333ff","#0000dd"];
+//     break;
+//     case 3:
+//     colors = ["#ff7700","#ff9933","#dd6600"];
+//     break;
+//     case 4:
+//     colors = ["#ffff00","#ffff33","#dddd00"];
+//     break;
+//     case 5:
+//     colors = ["#00ff00","#33ff33","#00dd00"];
+//     break;
+//     case 6:
+//     colors = ["#ff0000","#ff3333","#dd0000"];
+//     break;
+//     case 7:
+//     colors = ["#770077","#993399","#660066"];
+//     break;
+//     default:
+//     console.log ("color out of bounds in colorpick");
+//   }
+//   return colors;
+// }

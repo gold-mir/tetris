@@ -1,9 +1,77 @@
-
 $(document).ready(function () {
   canvas = document.getElementById('canvas');
   c = canvas.getContext('2d');
   startScreen(c, canvas);
+  document.onkeydown = function (e) {
+    switch (e.keyCode) {
+      case 37:
+        moveLeft();
+        break;
+      case 38:
+        rotatePiece();
+        break;
+      case 39:
+        moveRight();
+        break;
+      case 40:
+        moveDown();
+        break;
+      default:
+        console.log("non arrow key");
+    }
+    //e.preventDefault();
+  }
+
 });
+
+function moveLeft() {
+  var i = 0;
+  inputPiece.points.forEach(function (input) {
+    inputPiece.points[i].x -= 1;
+    i++;
+  });
+  drawScreen(c, canvas);
+}
+
+function moveRight() {
+  var i = 0;
+  inputPiece.points.forEach(function (input) {
+    inputPiece.points[i].x += 1;
+    i++;
+  });
+  drawScreen(c, canvas);
+}
+
+function moveDown() {
+  var i = 0;
+  inputPiece.points.forEach(function (input) {
+    inputPiece.points[i].y += 1;
+    i++;
+  });
+  drawScreen(c, canvas);
+}
+
+function moveBlock(c, canvas) {
+  document.body.onkeydown = function (e) {
+    switch (e.keyCode) {
+      case 37:
+        moveLeft();
+        break;
+      case 38:
+        rotatePiece();
+        break;
+      case 39:
+        moveRight();
+        break;
+      case 40:
+        moveDown();
+        break;
+      default:
+        console.log("non arrow key");
+    }
+    e.preventDefault();
+  }
+}
 
 function startScreen(c, canvas) {
   var blinkOn = true;
@@ -34,7 +102,7 @@ function startScreen(c, canvas) {
             clearInterval(logoFadeInterval);
             c.clearRect(0, 0, canvas.width, canvas.height);
             c.globalAlpha = 1;
-            document.body.onkeydown = null;
+            //document.body.onkeydown = null;
             setTimeout(function () {
               drawAll(c, canvas);
             }, 1000)
@@ -89,18 +157,19 @@ function colorPick(color) {
       colors = ["#770077", "#993399", "#660066"];
       break;
     default:
-      console.log("color out of bounds in colorpick");
+      console.log("color out of bounds in colorpick " + color);
   }
   return colors;
 }
+var inputPiece = pieces.piece4;
 
-function drawScreen(c, canvas){
+function drawScreen(c, canvas) {
   c.clearRect(0, 0, canvas.width, canvas.height);
   buildCanvas(c);
   drawUI(c);
   console.log(inputPiece);
 
-  for(var i = 0; i < inputPiece.points.length; i++) {
+  for (var i = 0; i < inputPiece.points.length; i++) {
     drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.color);
 
   }
@@ -194,7 +263,7 @@ function drawUI(c, canvas) {
   c.stroke();
 }
 
-function drawNextTile(c, canvas,x, y) {
+function drawNextTile(c, canvas, x, y) {
 
   if ((x <= 5) && (y <= 3)) {
     var xPos = (50 * x) + 560;
