@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -11,7 +12,62 @@ $(document).ready(function() {
   buildCanvas(ctx);
   drawUI(ctx);
   drawScreen(ctx, canvas);
+
+
+  function moveLeft (){
+    var i = 0;
+    inputPiece.points.forEach(function(input){
+      inputPiece.points[i].x -= 1;
+      i++;
+    });
+    drawScreen(ctx, canvas);
+  }
+
+  function moveRight (){
+    var i = 0;
+    inputPiece.points.forEach(function(input){
+      inputPiece.points[i].x += 1;
+      i++;
+    });
+    drawScreen(ctx, canvas);
+  }
+
+  function moveDown (){
+    var i = 0;
+    inputPiece.points.forEach(function(input){
+      inputPiece.points[i].y += 1;
+      i++;
+    });
+    drawScreen(ctx, canvas);
+  }
+
+  function rotatePiece(){
+
+    drawScreen(ctx, canvas);
+  }
+
+  document.body.onkeydown = function(e){
+    switch (e.keyCode) {
+      case 37:
+        moveLeft();
+        break;
+      case 38:
+        rotatePiece();
+        break;
+      case 39:
+        moveRight();
+        break;
+      case 40:
+        moveDown();
+        break;
+      default:
+        console.log("non arrow key");
+    }
+  }
 });
+
+var inputPiece = pieces.piece4;
+
 
 function buildCanvas(ctx) {
   ctx.beginPath();
@@ -24,36 +80,36 @@ function buildCanvas(ctx) {
   //ctx.fill();
   ctx.stroke();
 }
-
-function colorPick(color) {
-  var colors = [];
-  switch(color) {
-    case 1:
-    colors = ["#00ffff","#33ffff","#00dddd"];
-    break;
-    case 2:
-    colors = ["#0000ff","#3333ff","#0000dd"];
-    break;
-    case 3:
-    colors = ["#ff7700","#ff9933","#dd6600"];
-    break;
-    case 4:
-    colors = ["#ffff00","#ffff33","#dddd00"];
-    break;
-    case 5:
-    colors = ["#00ff00","#33ff33","#00dd00"];
-    break;
-    case 6:
-    colors = ["#ff0000","#ff3333","#dd0000"];
-    break;
-    case 7:
-    colors = ["#770077","#993399","#660066"];
-    break;
-    default:
-    console.log ("color out of bounds in colorpick");
-  }
-  return colors;
-}
+// we stole your function
+// function colorPick(color) {
+//   var colors = [];
+//   switch(color) {
+//     case 1:
+//     colors = ["#00ffff","#33ffff","#00dddd"];
+//     break;
+//     case 2:
+//     colors = ["#0000ff","#3333ff","#0000dd"];
+//     break;
+//     case 3:
+//     colors = ["#ff7700","#ff9933","#dd6600"];
+//     break;
+//     case 4:
+//     colors = ["#ffff00","#ffff33","#dddd00"];
+//     break;
+//     case 5:
+//     colors = ["#00ff00","#33ff33","#00dd00"];
+//     break;
+//     case 6:
+//     colors = ["#ff0000","#ff3333","#dd0000"];
+//     break;
+//     case 7:
+//     colors = ["#770077","#993399","#660066"];
+//     break;
+//     default:
+//     console.log ("color out of bounds in colorpick");
+//   }
+//   return colors;
+// }
 
 function flashyText(ctx, flashy) {
   var count = 0;
@@ -87,22 +143,25 @@ function flashyText(ctx, flashy) {
   return flashy;
 }
 
+
+
 function drawScreen(c, canvas){
   c.clearRect(0, 0, canvas.width, canvas.height);
   buildCanvas(c);
   drawUI(c);
-  inputArr = [
-    {x:1,y:1,color:1},{x:1,y:2,color:1},{x:2,y:1,color:1},{x:2,y:2,color:1},
-  ]
-  for(var i = 0; i < inputArr.length;i++) {
-    drawTile(c, inputArr[i].x, inputArr[i].y, inputArr[i].color);
+  console.log(inputPiece);
+
+  for(var i = 0; i < inputPiece.points.length; i++) {
+    drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.color);
   }
+
 }
+
 function drawTile(c, x, y, color) {
   if ((x <= 9) && (y <= 19)) {
     var xPos = (50*x)+5;
     var yPos = (50*y)+5;
-    var colors = colorPick(color);
+    var colors = inputPiece.color;
 
     c.lineWidth = 2;
     c.beginPath();
@@ -170,10 +229,6 @@ function drawTile(c, x, y, color) {
     console.log("Call out of bounds to drawTile function");
   };
 }
-
-
-
-
 
 
 function drawUI(ctx) {
