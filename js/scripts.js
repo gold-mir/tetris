@@ -1,76 +1,71 @@
 $(document).ready(function () {
-  canvas = document.getElementById('canvas');
-  c = canvas.getContext('2d');
-  startScreen(c, canvas);
+  var canvas = document.getElementById('canvas');
+  var c = canvas.getContext('2d');
+  //startScreen(c, canvas);
+  drawAll(c, canvas);
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37:
-        moveLeft();
-        break;
+      moveLeft(c, canvas);
+      break;
       case 38:
-        rotatePiece();
-        break;
+      rotatePiece(c, canvas);
+      break;
       case 39:
-        moveRight();
-        break;
+      moveRight(c, canvas);
+      break;
       case 40:
-        moveDown();
-        break;
+      moveDown(c, canvas);
+      break;
       default:
-        console.log("non arrow key");
+      console.log("non arrow key");
     }
+    drawAll(c, canvas);
     //e.preventDefault();
   }
 
 });
 
-function moveLeft() {
+function moveLeft(c, canvas) {
   var i = 0;
   inputPiece.points.forEach(function (input) {
-    inputPiece.points[i].x -= 1;
-    i++;
-  });
-  drawScreen(c, canvas);
-}
-
-function moveRight() {
-  var i = 0;
-  inputPiece.points.forEach(function (input) {
-    inputPiece.points[i].x += 1;
-    i++;
-  });
-  drawScreen(c, canvas);
-}
-
-function moveDown() {
-  var i = 0;
-  inputPiece.points.forEach(function (input) {
-    inputPiece.points[i].y += 1;
-    i++;
-  });
-  drawScreen(c, canvas);
-}
-
-function moveBlock(c, canvas) {
-  document.body.onkeydown = function (e) {
-    switch (e.keyCode) {
-      case 37:
-        moveLeft();
-        break;
-      case 38:
-        rotatePiece();
-        break;
-      case 39:
-        moveRight();
-        break;
-      case 40:
-        moveDown();
-        break;
-      default:
-        console.log("non arrow key");
+    if (inputPiece.points[i].x <=0){
+      console.log("left")
+    } else {inputPiece.points[i].x -= 1;
+      i++;
     }
-    e.preventDefault();
-  }
+  });
+  drawScreen(c, canvas);
+}
+
+function moveRight(c, canvas) {
+  var i = 0;
+  inputPiece.points.forEach(function (input) {
+    if (inputPiece.points[i].x >=9){
+      console.log("Right")
+    } else {inputPiece.points[i].x += 1;
+      i++;
+    }
+  });
+  drawScreen(c, canvas);
+}
+
+function moveDown(c, canvas) {
+  var i = 0;
+  inputPiece.points.forEach(function (input) {
+    if (inputPiece.points[i].y >= 19){
+      console.log("down")
+    } else {inputPiece.points[i].y += 1;
+      i++;
+    }
+  });
+  drawScreen(c, canvas);
+}
+
+function rotatePiece(c, canvas) {
+  inputPiece = inputPiece.rotate();
+  drawAll(c, canvas);
+  return inputPiece;
 }
 
 function startScreen(c, canvas) {
@@ -115,6 +110,7 @@ function startScreen(c, canvas) {
 }
 
 function drawAll(c, canvas) {
+
   buildCanvas(c, canvas);
   drawUI(c, canvas);
   drawScreen(c, canvas);
@@ -136,32 +132,32 @@ function colorPick(color) {
   var colors = [];
   switch (color) {
     case 1:
-      colors = ["#00ffff", "#33ffff", "#00dddd"];
-      break;
+    colors = ["#00ffff", "#33ffff", "#00dddd"];
+    break;
     case 2:
-      colors = ["#0000ff", "#3333ff", "#0000dd"];
-      break;
+    colors = ["#0000ff", "#3333ff", "#0000dd"];
+    break;
     case 3:
-      colors = ["#ff7700", "#ff9933", "#dd6600"];
-      break;
+    colors = ["#ff7700", "#ff9933", "#dd6600"];
+    break;
     case 4:
-      colors = ["#ffff00", "#ffff33", "#dddd00"];
-      break;
+    colors = ["#ffff00", "#ffff33", "#dddd00"];
+    break;
     case 5:
-      colors = ["#00ff00", "#33ff33", "#00dd00"];
-      break;
+    colors = ["#00ff00", "#33ff33", "#00dd00"];
+    break;
     case 6:
-      colors = ["#ff0000", "#ff3333", "#dd0000"];
-      break;
+    colors = ["#ff0000", "#ff3333", "#dd0000"];
+    break;
     case 7:
-      colors = ["#770077", "#993399", "#660066"];
-      break;
+    colors = ["#770077", "#993399", "#660066"];
+    break;
     default:
-      console.log("color out of bounds in colorpick " + color);
+    console.log("color out of bounds in colorpick " + color);
   }
   return colors;
 }
-var inputPiece = pieces.piece4;
+var inputPiece = pieces.piece3;
 
 function drawScreen(c, canvas) {
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -170,7 +166,7 @@ function drawScreen(c, canvas) {
   console.log(inputPiece);
 
   for (var i = 0; i < inputPiece.points.length; i++) {
-    drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.color);
+    drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.points[i].meta.color);
 
   }
 
@@ -182,8 +178,6 @@ function drawTile(c, x, y, color) {
     var xPos = (50 * x) + 5;
     var yPos = (50 * y) + 5;
     var colors = colorPick(color);
-
-
     c.lineWidth = 2;
     c.beginPath();
     c.moveTo(xPos, yPos);
