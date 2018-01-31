@@ -1,10 +1,10 @@
 $(document).ready(function () {
   canvas = document.getElementById('canvas');
   c = canvas.getContext('2d');
-  startScreen();
+  startScreen(c, canvas);
 });
 
-function startScreen() {
+function startScreen(c, canvas) {
   var blinkOn = true;
   var textInteveral = window.setInterval(function () {
     var image = document.getElementById('source');
@@ -35,7 +35,7 @@ function startScreen() {
             c.globalAlpha = 1;
             document.body.onkeydown = null;
             setTimeout(function () {
-              drawAll();
+              drawAll(c, canvas);
             }, 1000)
             //return;
           }
@@ -45,13 +45,13 @@ function startScreen() {
   }, 500);
 }
 
-function drawAll() {
-  buildCanvas();
-  drawUI();
-  drawScreen();
+function drawAll(c, canvas) {
+  buildCanvas(c, canvas);
+  drawUI(c, canvas);
+  drawScreen(c, canvas);
 }
 
-function buildCanvas() {
+function buildCanvas(c, canvas) {
   c.lineWidth = 4;
   c.beginPath();
   c.moveTo(2, 2);
@@ -93,7 +93,7 @@ function colorPick(color) {
   return colors;
 }
 
-function drawScreen() {
+function drawScreen(c, canvas) {
   c.clearRect(0, 0, canvas.width, canvas.height);
   buildCanvas(c);
   drawUI(c);
@@ -115,11 +115,11 @@ function drawScreen() {
     color: 1
   }, ]
   for (var i = 0; i < inputArr.length; i++) {
-    drawTile(inputArr[i].x, inputArr[i].y, inputArr[i].color);
+    drawTile(c, inputArr[i].x, inputArr[i].y, inputArr[i].color);
   }
 }
 
-function drawTile(x, y, color) {
+function drawTile(c, x, y, color) {
   if ((x <= 9) && (y <= 19)) {
     var xPos = (50 * x) + 5;
     var yPos = (50 * y) + 5;
@@ -196,7 +196,7 @@ function drawTile(x, y, color) {
 
 
 
-function drawUI() {
+function drawUI(c, canvas) {
   c.beginPath();
   //c.lineWidth = 4;
   c.fillStyle = '#ccffdd';
@@ -209,7 +209,7 @@ function drawUI() {
   c.stroke();
 }
 
-function drawNextTile(x, y) {
+function drawNextTile(c, canvas,x, y) {
 
   if ((x <= 5) && (y <= 3)) {
     var xPos = (50 * x) + 560;
