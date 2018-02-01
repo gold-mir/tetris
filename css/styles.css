@@ -1,5 +1,5 @@
 #source {
-  display: none;
+  /* display: none; */
 }
 
 #canvas-container {
@@ -16,4 +16,7 @@ body{
 
 #canvas{
   background-color: white;
+}
+#game-over {
+    display: none;
 }
