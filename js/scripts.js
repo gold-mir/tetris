@@ -1,8 +1,9 @@
 $(document).ready(function () {
-	var canvas = document.getElementById('canvas');
-	var c = canvas.getContext('2d');
+	canvas = document.getElementById('canvas');
+	c = canvas.getContext('2d');
 	//startScreen(c, canvas);
-	drawAll(c, canvas);
+    drawAll(c, canvas);
+    //dropBlock(c, canvas);
 	document.onkeydown = function (e) {
 		switch (e.keyCode) {
 		case 37:
@@ -26,14 +27,14 @@ $(document).ready(function () {
 
 });
 function dropBlock(c, canvas, timer) {
-    //nodef
+    timer = timer || 500;
 	dropInterval = setInterval(function() {
 		if (moveDown(c, canvas) === false) {
-			bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+            bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+            drawAll(c, canvas);
 			clearInterval(dropInterval);
-
 		}
-	}, 1000/60);
+	}, timer);
 }
 
 
@@ -63,7 +64,7 @@ function moveRight(c, canvas) {
 
 function moveDown(c, canvas) { 
 	newPiece = inputPiece.translate(directions.down);
-	if (newPiece.collides(bottomBlock)) {
+    if (newPiece.collides(bottomBlock) || newPiece.collides(boundingBlock)) {
 		return false;
 	}
 	else {
