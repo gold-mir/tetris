@@ -22,10 +22,13 @@ $(document).ready(function () {
 		case 40:
 			moveDown(c, canvas);
 			break;
+		case 32:
+		  moveDownAll(c,canvas);
+			break;
 		default:
 			console.log('non arrow key');
 		}
-		drawAll(c, canvas);
+		drawScreen(c, canvas);
 	};
 
 });
@@ -33,7 +36,7 @@ function dropBlock(c, canvas, timer) {
 	var timer = timer || 500;
 	dropInterval = setInterval(function() {
 		if (moveDown(c, canvas) === false) {
-			drawAll(c, canvas);
+			drawScreen(c, canvas);
 		}
 	}, timer);
 }
@@ -78,6 +81,22 @@ function moveDown(c, canvas) {
 	}
 }
 
+function moveDownAll(c,canvas) {
+	notDone = true;
+	while (notDone) {
+		newPiece = inputPiece.translate(directions.down);
+		if (newPiece.collides(bottomBlock) || newPiece.collides(boundingBlock)) {
+			bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+			inputPiece = getNewPiece();
+			notDone = false;
+		}
+		else {
+			inputPiece = inputPiece.translate(directions.down);
+			drawScreen(c, canvas);
+		}
+	}
+}
+
 function rotatePiece(c, canvas) {
 	newPiece = inputPiece.rotate();
 	if (newPiece.rotate().collides(bottomBlock) || newPiece.collides(boundingBlock)){
@@ -85,7 +104,7 @@ function rotatePiece(c, canvas) {
 	}
 	else{
 	    inputPiece = inputPiece.rotate();
-	    drawAll(c, canvas);
+	    drawScreen(c, canvas);
 		return inputPiece;
 	}
 }
@@ -121,7 +140,7 @@ function startScreen(c, canvas) {
 						//document.body.onkeydown = null;
 						setTimeout(function () {
 
-							drawAll(c, canvas);
+							drawScreen(c, canvas);
 						}, 1000);
 						//return;
 					}
@@ -129,13 +148,6 @@ function startScreen(c, canvas) {
 			}
 		};
 	}, 500);
-}
-
-function drawAll(c, canvas) {
-
-	buildCanvas(c, canvas);
-	drawUI(c, canvas);
-	drawScreen(c, canvas);
 }
 
 function buildCanvas(c, canvas) {
