@@ -1,3 +1,4 @@
+inputPiece = getNewPiece();
 $(document).ready(function () {
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
@@ -32,7 +33,7 @@ function dropBlock(c, canvas, timer) {
 		if (moveDown(c, canvas) === false) {
             bottomBlock = mergeBlocks(bottomBlock, inputPiece);
             drawAll(c, canvas);
-			clearInterval(dropInterval);
+            clearInterval(dropInterval);
 		}
 	}, timer);
 }
@@ -179,15 +180,15 @@ function colorPick(color) {
 	}
 	return colors;
 }
-// var inputPiece = pieces.piece3;
-function getNewPiece {
-	inputPiece = nextPiece;
-	nextPiece = blockArr.shift;
+
+function getNewPiece() {
+    var blockArr = [];
 	if (blockArr.length === 0) {
 		blockArr = buildBlockArr();
 	}
+	var nextPiece = blockArr.shift();
+	return nextPiece;
 }
-
 function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	buildCanvas(c);

@@ -180,13 +180,13 @@ function mergeBlocks(bottomBlock, currentBlock) {
                 } else if (Point.y < i) {
                     tempBBlock.points.push(Point.newCopy(Point.x, Point.y + 1));
                 };
-            });
+            })
             bottomBlock = tempBBlock;
         };
     };
-  };
-  return bottomBlock;
-}
+    return bottomBlock;
+};
+
 
 var boundingBlock = new Block([], 1);
 for (i = 0; i <= 19; i++) {
@@ -202,9 +202,7 @@ function buildBlockArr() {
     //Creates an array of blocks and randomizes them.
     var blockArr = [];
     for (var i = 0; i < 4; i++) {
-        pieces.forEach(function (piece) {
-            blockArr.push(block)
-        })
+        blockArr = blockArr.concat(Object.values(pieces))
     }
     for (var o = blockArr.length - 1; o > 0; o--) { //Classic Fisher-Yates shuffle
         var j = Math.floor(Math.random() * (o + 1));
@@ -212,7 +210,6 @@ function buildBlockArr() {
         blockArr[o] = blockArr[j];
         blockArr[j] = temp;
     }
-    console.log(blockArr);
     return blockArr;
 }
 
