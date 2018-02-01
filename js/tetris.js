@@ -159,7 +159,7 @@ var currentBlock5 = new Block([new Point(8, 19), new Point(8, 18, true), new Poi
 var bottomBlock = new Block([], 1);
 var score = 0;
 function mergeBlocks (bottomBlock, currentBlock) {
-  bottomBlock.points.push.apply(bottomBlock.points, currentBlock.points);
+  bottomBlock.points.push.apply(bottomBlock.points,currentBlock.points);
   var numPointsInRow = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   bottomBlock.points.forEach(function(Point) {
     numPointsInRow[Point.y]++
@@ -179,7 +179,7 @@ function mergeBlocks (bottomBlock, currentBlock) {
     };
   };
   return bottomBlock;
-}
+}ß
 
 var boundingBlock = new Block([], 1);
 for (i=0;i<=19;i++) {
