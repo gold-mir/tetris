@@ -4,7 +4,7 @@ $(document).ready(function () {
 	inputPiece = getNewPiece();
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
-    startScreen(c, canvas);
+    //startScreen(c, canvas);
 	//drawAll(c, canvas);
 	dropBlock(c,canvas);
 	document.onkeydown = function (e) {
@@ -208,7 +208,11 @@ function getNewPiece() {
 function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	buildCanvas(c, canvas);
-	drawUI(c);
+    drawUI(c);
+    c.fillStyle = '#000000';
+    c.fillRect(506, 0, 50, 1008);
+    c.fillRect(556, 208, 308, 40);
+    c.fillRect(556, 377, 308, 631);
 	for (var i = 0; i < inputPiece.points.length; i++) {
 		drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.points[i].meta.color);
 	}
