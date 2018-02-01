@@ -3,9 +3,10 @@ $(document).ready(function () {
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
 	//startScreen(c, canvas);
-    drawAll(c, canvas);
-    //dropBlock(c, canvas);
+	drawAll(c, canvas);
+	dropBlock(c,canvas);
 	document.onkeydown = function (e) {
+		e.preventDefault();
 		switch (e.keyCode) {
 		case 37:
 			moveLeft(c, canvas);
@@ -23,18 +24,18 @@ $(document).ready(function () {
 			console.log('non arrow key');
 		}
 		drawAll(c, canvas);
-		//e.preventDefault();
 	};
 
 });
 function dropBlock(c, canvas, timer) {
-    timer = timer || 500;
+	var timer = timer || 500;
 	dropInterval = setInterval(function() {
 		if (moveDown(c, canvas) === false) {
-            bottomBlock = mergeBlocks(bottomBlock, inputPiece);
             drawAll(c, canvas);
-            clearInterval(dropInterval);
-		}
+			// bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+			// drawAll(c, canvas);
+			// //clearInterval(dropInterval);
+        }
 	}, timer);
 }
 
@@ -65,7 +66,9 @@ function moveRight(c, canvas) {
 
 function moveDown(c, canvas) {
 	newPiece = inputPiece.translate(directions.down);
-    if (newPiece.collides(bottomBlock) || newPiece.collides(boundingBlock)) {
+	if (newPiece.collides(bottomBlock) || newPiece.collides(boundingBlock)) {
+		bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+		inputPiece = getNewPiece();
 		return false;
 	}
 	else {
@@ -112,7 +115,7 @@ function startScreen(c, canvas) {
 					c.clearRect(0, 0, canvas.width, canvas.height);
 					c.drawImage(image, 0, 0);
 					if (c.globalAlpha <= .01) {
-						clearInterval(logoFadeInterval);
+						//clearInterval(logoFadeInterval);
 						c.clearRect(0, 0, canvas.width, canvas.height);
 						c.globalAlpha = 1;
 						//document.body.onkeydown = null;
@@ -182,16 +185,17 @@ function colorPick(color) {
 }
 
 function getNewPiece() {
-    var blockArr = [];
+	var blockArr = [];
 	if (blockArr.length === 0) {
 		blockArr = buildBlockArr();
 	}
 	var nextPiece = blockArr.shift();
+    
 	return nextPiece;
 }
 function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
-	buildCanvas(c);
+	buildCanvas(c, canvas);
 	drawUI(c);
 	for (var i = 0; i < inputPiece.points.length; i++) {
 		drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.points[i].meta.color);
