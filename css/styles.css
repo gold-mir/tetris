@@ -1,3 +1,16 @@
 #source {
   display: none;
 }
+
+#canvas-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+body{
+  background-color: #3b3d3f;
+}
+
+#canvas{
+  background-color: white;
+}

@@ -1,8 +1,8 @@
 $(document).ready(function () {
   var canvas = document.getElementById('canvas');
   var c = canvas.getContext('2d');
-  //startScreen(c, canvas);
-  drawAll(c, canvas);
+  startScreen(c, canvas);
+  // drawAll(c, canvas);
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37:
@@ -70,7 +70,7 @@ function startScreen(c, canvas) {
       //console.log("Blink On");
       c.fillStyle = '#555555';
       c.font = '48px serif';
-      c.fillText('Press Space to begin.', 350, 600);
+      c.fillText('Press Space to begin.', 250, 500);
       c.drawImage(image, 0, 0);
     } else {
       //console.log("Blink Off");
