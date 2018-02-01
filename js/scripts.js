@@ -25,6 +25,17 @@ $(document).ready(function () {
 	};
 
 });
+function dropBlock(c, canvas, timer) {
+    //nodef
+	dropInterval = setInterval(function() {
+		if (moveDown(c, canvas) === false) {
+			bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+			clearInterval(dropInterval);
+
+		}
+	}, 1000/60);
+}
+
 
 function moveLeft(c, canvas) {
 	newPiece = inputPiece.translate(directions.left);
@@ -52,8 +63,8 @@ function moveRight(c, canvas) {
 
 function moveDown(c, canvas) {
 	newPiece = inputPiece.translate(directions.down);
-	if ((newPiece.collides(bottomBlock)) || (newPiece.collides(bottomBlock))) {
-		return;
+	if (newPiece.collides(bottomBlock)) {
+		return false;
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.down);
@@ -63,7 +74,11 @@ function moveDown(c, canvas) {
 }
 
 function rotatePiece(c, canvas) {
-	if (inputPiece.rotate().collides(bottomBlock)){
+	newPiece = inputPiece.rotate();
+	if (newPiece.rotate().collides(bottomBlock) || newPiece.collides(boundingBlock)){
+		return;
+	}
+	else{
 	    inputPiece = inputPiece.rotate();
 	    drawAll(c, canvas);
 		return inputPiece;
@@ -90,17 +105,17 @@ function startScreen(c, canvas) {
 		document.body.onkeydown = function (e) {
 			if (e.keyCode == 32) {
 				clearInterval(textInteveral);
-				logoFadeInterval = window.setInterval(function () {
+				var logoFadeInterval = window.setInterval(function () {
 					c.globalAlpha -= 0.01;
 					c.clearRect(0, 0, canvas.width, canvas.height);
 					c.drawImage(image, 0, 0);
 					if (c.globalAlpha <= .01) {
-						start = true;
 						clearInterval(logoFadeInterval);
 						c.clearRect(0, 0, canvas.width, canvas.height);
 						c.globalAlpha = 1;
 						//document.body.onkeydown = null;
 						setTimeout(function () {
+
 							drawAll(c, canvas);
 						}, 1000);
 						//return;
@@ -129,16 +144,10 @@ function buildCanvas(c, canvas) {
 	//c.fill();
 	c.stroke();
 }
-// function generateBlockArr() {
-// 	blockArr = [];
-// 	var numPerArr = 4;
-// 	var blockQuantity = 7;
-// 	for (var i = 0; i < numPerArr; i++){
-// 		for (var o = 0; i < blockQuantity; i++) {
 
-// 		}
-// 	}
-// }
+function dropTimer() {
+
+}
 
 function colorPick(color) {
 	var colors = [];
