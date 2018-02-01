@@ -5,7 +5,7 @@ $(document).ready(function () {
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
 	//startScreen(c, canvas);
-	drawAll(c, canvas);
+	drawScreen(c, canvas);
 	dropBlock(c,canvas);
 	document.onkeydown = function (e) {
 		e.preventDefault();
@@ -22,10 +22,13 @@ $(document).ready(function () {
 		case 40:
 			moveDown(c, canvas);
 			break;
+		case 32:
+		  moveDownAll(c,canvas);
+			break;
 		default:
 			console.log('non arrow key');
 		}
-		drawAll(c, canvas);
+		drawScreen(c, canvas);
 	};
 
 });
@@ -33,7 +36,7 @@ function dropBlock(c, canvas, timer) {
 	var timer = timer || 500;
 	dropInterval = setInterval(function() {
 		if (moveDown(c, canvas) === false) {
-			drawAll(c, canvas);
+			drawScreen(c, canvas);
 		}
 	}, timer);
 }
@@ -50,7 +53,6 @@ function moveLeft(c, canvas) {
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.left);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
 	}
 }
@@ -62,7 +64,6 @@ function moveRight(c, canvas) {
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.right);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
 	}
 }
@@ -76,8 +77,23 @@ function moveDown(c, canvas) {
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.down);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
+	}
+}
+
+function moveDownAll(c,canvas) {
+	notDone = true;
+	while (notDone) {
+		newPiece = inputPiece.translate(directions.down);
+		if (newPiece.collides(bottomBlock) || newPiece.collides(boundingBlock)) {
+			bottomBlock = mergeBlocks(bottomBlock, inputPiece);
+			inputPiece = getNewPiece();
+			notDone = false;
+		}
+		else {
+			inputPiece = inputPiece.translate(directions.down);
+			drawScreen(c, canvas);
+		}
 	}
 }
 
@@ -88,7 +104,7 @@ function rotatePiece(c, canvas) {
 	}
 	else{
 	    inputPiece = inputPiece.rotate();
-	    drawAll(c, canvas);
+	    drawScreen(c, canvas);
 		return inputPiece;
 	}
 }
@@ -124,7 +140,7 @@ function startScreen(c, canvas) {
 						//document.body.onkeydown = null;
 						setTimeout(function () {
 
-							drawAll(c, canvas);
+							drawScreen(c, canvas);
 						}, 1000);
 						//return;
 					}
@@ -132,13 +148,6 @@ function startScreen(c, canvas) {
 			}
 		};
 	}, 500);
-}
-
-function drawAll(c, canvas) {
-
-	buildCanvas(c, canvas);
-	drawUI(c, canvas);
-	drawScreen(c, canvas);
 }
 
 function buildCanvas(c, canvas) {
