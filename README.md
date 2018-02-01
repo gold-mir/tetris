@@ -12,7 +12,7 @@ To instead setup a local copy on your machine:
 
 2. Within the master folder, navigate to the index.html file and open it in your preferred (modern) browser.
 
-3. To explore or edit the project code, open sd. Any saved changes will be reflected when you refresh or reopen the index.html file within your browser.
+3. To explore or edit the project code, open the relevant file/s in your preferred text editor. Any saved changes will be reflected when you refresh or reopen the index.html file within your browser.
 
 
 ## Gameplay
