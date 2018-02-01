@@ -3,7 +3,9 @@
 }
 
 #canvas-container {
-  margin-top: 20px;
+  margin-bottom: 10%;
+  position: relative;
+  transform: translateY(10%);
   text-align: center;
 }
 
