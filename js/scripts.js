@@ -61,7 +61,7 @@ function moveRight(c, canvas) {
 	}
 }
 
-function moveDown(c, canvas) { 
+function moveDown(c, canvas) {
 	newPiece = inputPiece.translate(directions.down);
 	if (newPiece.collides(bottomBlock)) {
 		return false;
@@ -178,7 +178,14 @@ function colorPick(color) {
 	}
 	return colors;
 }
-var inputPiece = pieces.piece3;
+// var inputPiece = pieces.piece3;
+function getNewPiece {
+	inputPiece = nextPiece;
+	nextPiece = blockArr.shift;
+	if (blockArr.length === 0) {
+		blockArr = buildBlockArr();
+	}
+}
 
 function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);

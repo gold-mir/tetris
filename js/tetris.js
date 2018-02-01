@@ -184,8 +184,10 @@ function mergeBlocks(bottomBlock, currentBlock) {
             bottomBlock = tempBBlock;
         };
     };
-    return bottomBlock;
+  };
+  return bottomBlock;
 }
+
 var boundingBlock = new Block([], 1);
 for (i = 0; i <= 19; i++) {
     boundingBlock.points.push(new Point(-1, i));
