@@ -181,6 +181,15 @@ function mergeBlocks (bottomBlock, currentBlock) {
   return bottomBlock;
 }
 
+var boundingBlock = new Block([], 1);
+for (i=0;i<=19;i++) {
+  boundingBlock.points.push(new Point(-1,i));
+  boundingBlock.points.push(new Point(10,i));
+};
+for (i=0;i<=9;i++) {
+  boundingBlock.points.push(new Point(i,20));
+};
+
 const pieces = {
   piece1: new Block([new Point(0, 0), new Point(1, 0, true), new Point(2, 0), new Point(3, 0)], 1, lineRotator),
   piece2: new Block([new Point(0, 1), new Point(0, 0), new Point(1, 0, true), new Point(2, 0)], 2),
