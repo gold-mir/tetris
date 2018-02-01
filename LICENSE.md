@@ -1,4 +1,4 @@
-Copyright (c) <2018> <Miranda Keith, Tyler Wickline, Tim Firman, Eric Swotinsky, and Jamie Pittak>
+Copyright (c) 2018 **Miranda Keith, Tyler Wickline, Tim Firman, Eric Swotinsky, and Jamie Pittak**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
