@@ -197,6 +197,10 @@ function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	buildCanvas(c, canvas);
 	drawUI(c);
+	c.fillStyle = '#000000';
+	c.fillRect(506,0,50,1008);
+	c.fillRect(556,208,308,40);
+	c.fillRect(556,377,308,631);
 	for (var i = 0; i < inputPiece.points.length; i++) {
 		drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.points[i].meta.color);
 	}
@@ -298,21 +302,4 @@ function drawUI(c, canvas) {
 	nextPiece.points.forEach(function(Point) {
 		drawTile(c, Point.x + 12, Point.y + 1, Point.meta.color);
 	});
-}
-
-function drawNextTile(c, canvas, x, y) {
-
-	if ((x <= 5) && (y <= 3)) {
-		var xPos = (50 * x) + 560;
-		var yPos = (50 * y) + 6;
-		c.beginPath();
-		c.moveTo(xPos, yPos);
-		c.lineTo(xPos + 46, yPos);
-		c.lineTo(xPos + 46, yPos + 46);
-		c.lineTo(xPos, yPos + 46);
-		c.closePath();
-		c.stroke();
-	} else {
-		console.log('Call out of bounds to drawNextTile function');
-	}
 }
