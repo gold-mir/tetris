@@ -150,11 +150,11 @@ var squareRotator = function(counterclockwise){
 }
 
 var currentBlock0 = new Block([new Point(0, 19), new Point(0, 18, true), new Point(0, 17), new Point(0,16)], 1);
-var currentBlock1 = new Block([new Point(1, 19), new Point(1, 18, true), new Point(2, 18), new Point(2,19)], 4);
-var currentBlock2 = new Block([new Point(3, 19), new Point(3, 18, true), new Point(4, 18), new Point(4,19)], 4);
+var currentBlock1 = new Block([new Point(1, 19), new Point(1, 18, true), new Point(2, 18), new Point(2,19)], 2);
+var currentBlock2 = new Block([new Point(3, 19), new Point(3, 18, true), new Point(4, 18), new Point(4,19)], 3);
 var currentBlock3 = new Block([new Point(5, 19), new Point(5, 18, true), new Point(5, 17), new Point(5,16)], 1);
-var currentBlock4 = new Block([new Point(6, 19), new Point(6, 18, true), new Point(7, 18), new Point(7,19)], 4);
-var currentBlock5 = new Block([new Point(8, 19), new Point(8, 18, true), new Point(9, 19), new Point(9,18)], 4);
+var currentBlock4 = new Block([new Point(6, 19), new Point(6, 18, true), new Point(7, 18), new Point(7,19)], 5);
+var currentBlock5 = new Block([new Point(8, 19), new Point(8, 18, true), new Point(9, 19), new Point(9,18)], 7);
 
 var bottomBlock = new Block([], 1);
 var score = 0;
@@ -181,14 +181,23 @@ function mergeBlocks (bottomBlock, currentBlock) {
   return bottomBlock;
 }
 
-var boundingBlock = new Block([], 1);
-for (i=0;i<=19;i++) {
-  boundingBlock.points.push(new Point(-1,i));
-  boundingBlock.points.push(new Point(10,i));
-};
-for (i=0;i<=9;i++) {
-  boundingBlock.points.push(new Point(i,20));
-};
+function buildBlockArr() {
+    //Creates an array of blocks and randomizes them.
+    var blockArr = [];
+    for (var i = 0; i < 4; i++) {
+        pieces.forEach(function(piece) {
+            blockArr.push(block)
+        })
+    }
+    for (var o = blockArr.length -1; o > 0; 0--) { //Classic Fisher-Yates shuffle
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = blockArr[o];
+        blockArr[o] = blockArr[j];
+        blockArr[j] = temp;
+    }
+    console.log(blockArr);
+    return blockArr;
+}
 
 const pieces = {
   piece1: new Block([new Point(0, 0), new Point(1, 0, true), new Point(2, 0), new Point(3, 0)], 1, lineRotator),
