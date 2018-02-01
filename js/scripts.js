@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	blockArr = buildBlockArr();
+	nextPiece = blockArr.shift();
 	inputPiece = getNewPiece();
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
@@ -182,14 +184,14 @@ function colorPick(color) {
 }
 
 function getNewPiece() {
-	var blockArr = [];
+	inputPiece = nextPiece;
 	if (blockArr.length === 0) {
 		blockArr = buildBlockArr();
 	}
-	var nextPiece = blockArr.shift();
-    
-	return nextPiece;
+	nextPiece = blockArr.shift();
+	return inputPiece;
 }
+
 function drawScreen(c, canvas) {
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	buildCanvas(c, canvas);
@@ -203,75 +205,69 @@ function drawScreen(c, canvas) {
 }
 
 function drawTile(c, x, y, color) {
-	if ((x <= 9) && (y <= 19)) {
+	var xPos = (50 * x) + 5;
+	var yPos = (50 * y) + 5;
+	var colors = colorPick(color);
+	c.lineWidth = 2;
+	c.beginPath();
+	c.moveTo(xPos, yPos);
+	c.lineTo(xPos + 48, yPos);
+	c.lineTo(xPos + 48, yPos + 48);
+	c.lineTo(xPos, yPos + 48);
+	c.closePath();
+	c.stroke();
 
-		var xPos = (50 * x) + 5;
-		var yPos = (50 * y) + 5;
-		var colors = colorPick(color);
-		c.lineWidth = 2;
-		c.beginPath();
-		c.moveTo(xPos, yPos);
-		c.lineTo(xPos + 48, yPos);
-		c.lineTo(xPos + 48, yPos + 48);
-		c.lineTo(xPos, yPos + 48);
-		c.closePath();
-		c.stroke();
+	c.fillStyle = colors[0];
+	c.lineWidth = 1;
+	c.beginPath();
+	c.moveTo(xPos + 2, yPos);
+	c.lineTo(xPos + 48, yPos);
+	c.lineTo(xPos + 48, yPos + 48);
+	c.lineTo(xPos + 2, yPos + 48);
+	c.closePath();
 
-		c.fillStyle = colors[0];
-		c.lineWidth = 1;
-		c.beginPath();
-		c.moveTo(xPos + 2, yPos);
-		c.lineTo(xPos + 48, yPos);
-		c.lineTo(xPos + 48, yPos + 48);
-		c.lineTo(xPos + 2, yPos + 48);
-		c.closePath();
+	c.beginPath();
+	c.moveTo(xPos + 9, yPos + 9);
+	c.lineTo(xPos + 39, yPos + 9);
+	c.lineTo(xPos + 39, yPos + 39);
+	c.lineTo(xPos + 9, yPos + 39);
+	c.closePath();
+	c.fill();
 
-		c.beginPath();
-		c.moveTo(xPos + 9, yPos + 9);
-		c.lineTo(xPos + 39, yPos + 9);
-		c.lineTo(xPos + 39, yPos + 39);
-		c.lineTo(xPos + 9, yPos + 39);
-		c.closePath();
-		c.fill();
+	c.fillStyle = colors[1];
+	c.beginPath();
+	c.moveTo(xPos + 1, yPos + 1);
+	c.lineTo(xPos + 9, yPos + 9);
+	c.lineTo(xPos + 39, yPos + 9);
+	c.lineTo(xPos + 47, yPos + 1);
+	c.closePath();
+	c.fill();
 
-		c.fillStyle = colors[1];
-		c.beginPath();
-		c.moveTo(xPos + 1, yPos + 1);
-		c.lineTo(xPos + 9, yPos + 9);
-		c.lineTo(xPos + 39, yPos + 9);
-		c.lineTo(xPos + 47, yPos + 1);
-		c.closePath();
-		c.fill();
+	//c.fillStyle = '#aaaaaa';
+	c.beginPath();
+	c.moveTo(xPos + 1, yPos + 1);
+	c.lineTo(xPos + 9, yPos + 9);
+	c.lineTo(xPos + 9, yPos + 39);
+	c.lineTo(xPos + 1, yPos + 47);
+	c.closePath();
+	c.fill();
 
-		//c.fillStyle = '#aaaaaa';
-		c.beginPath();
-		c.moveTo(xPos + 1, yPos + 1);
-		c.lineTo(xPos + 9, yPos + 9);
-		c.lineTo(xPos + 9, yPos + 39);
-		c.lineTo(xPos + 1, yPos + 47);
-		c.closePath();
-		c.fill();
+	c.fillStyle = colors[2];
+	c.beginPath();
+	c.moveTo(xPos + 1, yPos + 47);
+	c.lineTo(xPos + 9, yPos + 39);
+	c.lineTo(xPos + 39, yPos + 39);
+	c.lineTo(xPos + 47, yPos + 47);
+	c.closePath();
+	c.fill();
 
-		c.fillStyle = colors[2];
-		c.beginPath();
-		c.moveTo(xPos + 1, yPos + 47);
-		c.lineTo(xPos + 9, yPos + 39);
-		c.lineTo(xPos + 39, yPos + 39);
-		c.lineTo(xPos + 47, yPos + 47);
-		c.closePath();
-		c.fill();
-
-		c.beginPath();
-		c.moveTo(xPos + 47, yPos + 47);
-		c.lineTo(xPos + 39, yPos + 39);
-		c.lineTo(xPos + 39, yPos + 9);
-		c.lineTo(xPos + 47, yPos + 1);
-		c.closePath();
-		c.fill();
-
-	} else {
-		console.log('Call out of bounds to drawTile function');
-	}
+	c.beginPath();
+	c.moveTo(xPos + 47, yPos + 47);
+	c.lineTo(xPos + 39, yPos + 39);
+	c.lineTo(xPos + 39, yPos + 9);
+	c.lineTo(xPos + 47, yPos + 1);
+	c.closePath();
+	c.fill();
 }
 
 function drawUI(c, canvas) {
@@ -297,6 +293,10 @@ function drawUI(c, canvas) {
 	c.textAlign = 'center';
 	c.fillText('Score:', 708, 300);
 	c.fillText(score, 708, 350);
+
+	nextPiece.points.forEach(function(Point) {
+		drawTile(c, Point.x + 12, Point.y + 1, Point.meta.color);
+	});
 }
 
 function drawNextTile(c, canvas, x, y) {
