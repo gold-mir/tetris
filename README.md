@@ -14,7 +14,6 @@ To instead setup a local copy on your machine:
 
 3. To explore or edit the project code, open the relevant file/s in your preferred text editor. Any saved changes will be reflected when you refresh or reopen the index.html file within your browser.
 
-
 ## Gameplay
 
 Tetris is a tile-matching puzzle game in which a series of falling blocks must be manipulated so that they neatly fit together in horizontal rows across the game field.
@@ -41,7 +40,7 @@ If you encounter any bugs or would like to make suggestions regarding this proje
 
 ### License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is distributed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ### Acknowledgments
 Special thanks to:
