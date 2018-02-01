@@ -244,7 +244,7 @@ function drawTile(c, x, y, color) {
     console.log("Call out of bounds to drawTile function");
   };
 }
-
+var score = 0;
 function drawUI(c, canvas) {
   c.beginPath();
   //c.lineWidth = 4;
@@ -256,6 +256,18 @@ function drawUI(c, canvas) {
   c.closePath();
   c.fill();
   c.stroke();
+
+  c.moveTo(556, 250);
+  c.lineTo(860, 250);
+  c.lineTo(860, 375);
+  c.lineTo(556, 375);
+  c.closePath();
+  c.stroke();
+  c.fillStyle = 'darkblue';
+  c.font='48px Arial';
+  c.textAlign="center";
+  c.fillText ("Score:",708,300);
+  c.fillText (score,708,350);
 }
 
 function drawNextTile(c, canvas, x, y) {
