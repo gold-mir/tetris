@@ -27,17 +27,31 @@ $(document).ready(function () {
 });
 
 function moveLeft(c, canvas) {
+
+  for (var i = 0; i < inputPiece.points.length; i++) {
+    if (inputPiece.points[i].x <= 0) {
+      return;
+    }
+  }
   inputPiece = inputPiece.translate(directions.left)
+  console.log(inputPiece);
   drawScreen(c, canvas);
 }
 
 function moveRight(c, canvas) {
+  for (var i = 0; i < inputPiece.points.length; i++) {
+    if (inputPiece.points[i].x >= 9) {
+      return;
+    }
+  }
   inputPiece = inputPiece.translate(directions.right)
+  console.log(inputPiece)
   drawScreen(c, canvas);
 }
 
 function moveDown(c, canvas) {
   inputPiece = inputPiece.translate(directions.down)
+  console.log(inputPiece)
   drawScreen(c, canvas);
 }
 
@@ -106,6 +120,16 @@ function buildCanvas(c, canvas) {
   //c.fill();
   c.stroke();
 }
+function generateBlockArr() {
+  blockArr = [];
+  var numPerArr = 4;
+  var blockQuantity = 7;
+  for (var i = 0; i < numPerArr; i++){
+    for (var o = 0; i < blockQuantity; i++) {
+
+    }
+  }
+}
 
 function colorPick(color) {
   var colors = [];
@@ -142,8 +166,6 @@ function drawScreen(c, canvas) {
   c.clearRect(0, 0, canvas.width, canvas.height);
   buildCanvas(c);
   drawUI(c);
-  console.log(inputPiece);
-
   for (var i = 0; i < inputPiece.points.length; i++) {
     drawTile(c, inputPiece.points[i].x, inputPiece.points[i].y, inputPiece.points[i].meta.color);
 
