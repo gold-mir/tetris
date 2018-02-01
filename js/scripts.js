@@ -38,7 +38,7 @@ function dropBlock(c, canvas, timer) {
 function gameOver() {
     clearInterval(dropInterval);
     $("#canvas").hide();
-    $("#game-over").show();
+    $("game-over").show();
 }
 
 function moveLeft(c, canvas) {
@@ -48,7 +48,6 @@ function moveLeft(c, canvas) {
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.left);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
 	}
 }
@@ -60,7 +59,6 @@ function moveRight(c, canvas) {
 	}
 	else {
 		inputPiece = inputPiece.translate(directions.right);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
 	}
 }
@@ -71,10 +69,9 @@ function moveDown(c, canvas) {
 		bottomBlock = mergeBlocks(bottomBlock, inputPiece);
 		inputPiece = getNewPiece();
 		return false;
-	}
+	} 
 	else {
 		inputPiece = inputPiece.translate(directions.down);
-		console.log(inputPiece);
 		drawScreen(c, canvas);
 	}
 }
@@ -187,7 +184,10 @@ function getNewPiece() {
 		blockArr = buildBlockArr();
 	}
 	var nextPiece = blockArr.shift();
-    
+    if (nextPiece.collides(bottomBlock)) {
+        gameOver();
+        console.log("GAME OVER");
+    }
 	return nextPiece;
 }
 function drawScreen(c, canvas) {
