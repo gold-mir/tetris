@@ -4,7 +4,7 @@ A recreation of the classic video game "Tetris", built primarily in JavaScript. 
 
 ## Installation
 
-This game can be played online, with no additional setup required, at [link](linkURL).
+This game can be played online, with no additional setup required, at [GitHub.io](http://gold-mir/github.io/tetris).
 
 To instead setup a local copy on your machine:
 
@@ -18,17 +18,10 @@ To instead setup a local copy on your machine:
 ## Gameplay
 
 Tetris is a tile-matching puzzle game in which a series of falling blocks must be manipulated so that they neatly fit together in horizontal rows across the game field.
-```
-image?
-```
 
 Once the game begins, pieces will begin spawning one at a time from the top of the screen, and slowly falling towards the bottom. You can use the "left" and "right" arrow keys to move the active piece around, and the "down" arrow to cause the piece to drop faster.
 
-```
-another image?
-```
-
-conclusion
+Fill in an entire row, and you'll clear it from the screen! How long can you last before the falling pieces overwhelm you and fill your board?
 
 ## Built With
 
@@ -56,6 +49,3 @@ Special thanks to:
 * Alexey Pajitnov, original developer of Tetris.
 * John Franti, our instructor and campus director at Epicodus - Seattle.
 * You - for taking an interest in our work!
-
-
-### https://cms-assets.tutsplus.com/legacy-premium-tutorials/posts/13778/images/13778_6a74535d0ca89e5aa28303b28b685180.png
