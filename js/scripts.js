@@ -185,8 +185,8 @@ function getNewPiece() {
 	if (blockArr.length === 0) {
 		blockArr = buildBlockArr();
 	}
-	var nextPiece = blockArr.shift();
-    if (nextPiece.collides(bottomBlock)) {
+	nextPiece = blockArr.shift();
+    if (inputPiece.collides(bottomBlock)) {
         gameOver();
         console.log("GAME OVER");
     }
