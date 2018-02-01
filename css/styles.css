@@ -1,7 +1,3 @@
-#source {
-  /* display: none; */
-}
-
 #canvas-container {
   margin-bottom: 10%;
   position: relative;
@@ -19,4 +15,8 @@ body{
 }
 #game-over {
     display: none;
+}
+#score {
+    display: none;
+    text-align: center;
 }
