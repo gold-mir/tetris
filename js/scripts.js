@@ -4,7 +4,7 @@ $(document).ready(function () {
 	inputPiece = getNewPiece();
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
-	//startScreen(c, canvas);
+    //startScreen(c, canvas);
 	drawAll(c, canvas);
 	dropBlock(c,canvas);
 	document.onkeydown = function (e) {
@@ -40,7 +40,8 @@ function dropBlock(c, canvas, timer) {
 function gameOver() {
     clearInterval(dropInterval);
     $("#canvas").hide();
-    $("game-over").show();
+    $("#game-over").show();
+    $("#score").text(score);
 }
 
 function moveLeft(c, canvas) {
